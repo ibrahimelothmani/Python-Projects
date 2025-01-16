@@ -1,7 +1,13 @@
 operand = input("Enter Number : ")
 operand2 = input("Enter Number : ")
-
 sign = input("Sign : ")
+
+try:
+    operand = float(operand)
+    operand2 = float(operand2)
+except:
+    print("Error: Invalid input. Please enter numbers.")
+    exit()
 
 if sign == '+':
     result = float(operand) + float(operand2)
