@@ -1,14 +1,15 @@
 def add_person():
+    id = input("Your Id: ")
     name = input("Name: ")
     age = int(input("Age: "))
     email = input("Email: ")
-    person = {"name": name, "age": age, "email": email}
+    person = {"Id": id, "name": name, "age": age, "email": email}
     print("Person added successfully")
     return person
 
-def delete_person(people, name):
+def delete_person(people, id):
     for i, person in enumerate(people):
-        if person["name"] == name:
+        if person["id"] == id:
             del people[i]
             return True
     return False
@@ -25,17 +26,17 @@ def display_people(people):
     for person in people:
         print(f"Name: {person['name']}, Age: {person['age']}, Email: {person['email']}")
 
-def search_person(people, name):
+def search_person(people, id):
     for person in people:
-        if person["name"] == name:
+        if person["id"] == id:
             return person
     return None
 
 
 print("Hi! and welcome to the contact management system \n")
+people = []
 while True:
-        choice = input("You can 'Delete', 'Add', 'Update' or 'Q' for quit: ").lower()
-        people = []
+        choice = input("You can 'Search', 'Delete', 'Add', 'Update' or 'Q' for quit: ").lower()
         if choice == 'add':
             person = add_person()
             people.append(person)
@@ -48,11 +49,18 @@ while True:
                 continue
         elif choice == 'delete':
             name = input("Enter the name of the person you want to delete: ")
-            if delete_person(people, name):
+            if delete_person(people, id):
                 print("Person deleted successfully!")
             else:
                 print("Person not found!")
                 continue
+        elif choice =='search':
+            id = input("Enter the id of the person you want to search: ")
+            person = search_person(people, id)
+            if person:
+                print(f"Name: {person['name']}, Age: {person['age']}, Email: {person['email']}")
+            else:
+                print("Person not found!")
         elif choice == 'Q':
             print("Goodbye!")
             break
